@@ -4,25 +4,28 @@ This repository formalizes the **literal published wording** of JSP-000235:
 
 > Can a group be partitioned into cosets of pairwise distinct sizes?
 
-Under that wording, the answer is yes for every group.  The singleton family consisting only of the whole group is a one-coset partition.  Any pairwise-distinctness condition is vacuous on a singleton family.
+Under that wording, the answer is yes for every group. The singleton family consisting only of the whole group is a one-coset partition. Any pairwise-distinctness condition is vacuous on a singleton family.
 
-The formalization deliberately abstracts the word `size` as an arbitrary function on subsets.  Consequently the proof does not depend on interpreting size as cardinality, subgroup index, or any other conventional invariant.
+The formalization deliberately abstracts the word `size` as an arbitrary function on subsets. Consequently the proof does not depend on interpreting size as cardinality, subgroup index, or any other conventional invariant.
 
 ## Historical/source distinction
 
-The maintained source formulation for Erdős Problem 274 / the Herzog–Schönheim conjecture requires a **nontrivial** exact covering: more than one coset (`k > 1`).  The published JSP-000235 sentence omits that lower bound on the number of parts.
+The maintained source formulation for Erdős Problem 274 / the Herzog–Schönheim conjecture requires a **nontrivial** exact covering: more than one coset (`k > 1`). The published JSP-000235 sentence omits that lower bound on the number of parts.
 
-Accordingly, this repository does **not** claim to solve the historical Herzog–Schönheim conjecture.  It proves only the literal JSP wording as published.
+Accordingly, this repository does **not** claim to solve the historical Herzog–Schönheim conjecture. It proves only the literal JSP wording as published.
 
 ## Main theorem
 
 `JSP000235.jsp_000235_literal`
 
-The theorem states that for every group `G` and every function assigning a size value to each subset of `G`, there exists a finite coset partition whose distinct members have pairwise distinct size values.  The witness is `{Set.univ}`.
+The theorem states that for every group `G` and every function assigning a size value to each subset of `G`, there exists a finite coset partition whose distinct members have pairwise distinct size values. The witness is `{Set.univ}`.
 
 ## Reproduction
 
+From a fresh clone:
+
 ```bash
+lake update
 lake exe cache get
 lake build
 lake env lean JSP000235.lean
