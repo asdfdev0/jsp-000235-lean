@@ -18,6 +18,8 @@ jobs:
         run: |
           lean --version
           lake --version
+      - name: Materialize pinned dependencies
+        run: lake update
       - name: Fetch mathlib cache
         continue-on-error: true
         run: lake exe cache get
