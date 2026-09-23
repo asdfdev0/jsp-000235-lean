@@ -22,8 +22,24 @@ jobs:
         continue-on-error: true
         run: lake exe cache get
       - name: Build
-        run: lake build
+        id: build
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee build.log
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-log
+          path: build.log
       - name: Check endpoint and axioms
+        if: steps.build.outcome == 'success'
         run: lake env lean JSP000235.lean
       - name: Run audit
+        if: steps.build.outcome == 'success'
         run: lake env lean Audit.lean
+      - name: Enforce successful build
+        if: steps.build.outcome != 'success'
+        run: exit 1
